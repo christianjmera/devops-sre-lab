@@ -12,13 +12,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout application
         uses: actions/checkout@v4
+
+      - name: Checkout shared DevOps automation
+        uses: actions/checkout@v4
+        with:
+          repository: christianjmera/devops-automation
+          ref: v1.0.0
+          path: devops-automation
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.14"
 
-      - name: Execute test script
-        run: ./scripts/ci/run-tests.sh
+      - name: Execute shared test script
+        run: bash devops-automation/scripts/python/run-tests.sh
