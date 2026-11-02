@@ -11,6 +11,10 @@ jobs:
     name: Run Python tests
     runs-on: ubuntu-latest
 
+    env:
+      TEST_REQUIREMENTS_FILE: requirements-dev.txt
+      TEST_PATH: tests
+
     steps:
       - name: Checkout application
         uses: actions/checkout@v4
@@ -28,7 +32,4 @@ jobs:
           python-version: "3.14"
 
       - name: Execute shared test script
-        env:
-          TEST_REQUIREMENTS_FILE: requirements-dev.txt
-          TEST_PATH: tests
         run: bash devops-automation/scripts/python/run-tests.sh
